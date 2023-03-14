@@ -2,18 +2,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resume Application</title>
+    <title>Resume Application Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body,h1 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-<a href="users.jsp">Users page</a><br/>
-<br/>
-<a href="userdetails.jsp">Details page</a><br/>
-<br/>
-<h1><%= "Login!" %></h1>
-<form action="login" method="post">
-    Enter username: <input type="text" name="user"><br>
-    Enter password: <input type="password" name="pass">
-    <input type="submit" value="Log In">
-</form><br>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+    <div class="w3-display-topleft w3-padding-large w3-xlarge">
+        by Arturk Mammadli
+    </div>
+    <div class="w3-display-middle">
+        <h1 class="w3-jumbo w3-animate-top">RESUME APPLICATION</h1><br/>
+        <form action="login">
+            <center>
+                <button class="log">Start</button>
+                <%--<button class="reg">Sign Up</button>--%>
+            </center>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -9,40 +9,55 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <head>
-        <title>Details</title>
+        <title>User Details</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <%
             User user = (User) request.getAttribute("user");
         %>
-        <div>
-            <form action="userdetail" method="post">
+        <div class="container">
+            <form action="userdetails" method="post">
                 <input type="hidden" name="id" value="<%=user.getId()%>">
                 <input type="hidden" name="action" value="update"/>
-                <label>Name: </label>
-                <input type="text" size=30 name="name" value="<%=user.getName()%>"/><br/>
-                <br/>
-                <label>Surname: </label>
-                <input type="text" size=30 name="surname" value="<%=user.getSurname()%>"/><br/>
-                <br/>
-                <label>Address: </label>
-                <input type="text" size=30 name="address" value="<%=user.getAddress()%>"/><br/>
-                <br/>
-                <label>Phone: </label>
-                <input type="text" size=30 name="phone" value="<%=user.getPhone()%>"/><br/>
-                <br/>
-                <label>Email: </label>
-                <input type="text" size=30 name="email" value="<%=user.getEmail()%>"/><br/>
-                <br/>
-                <label>Birthday: </label>
-                <input type="text" size=30 name="birthday" value="<%=user.getBirthday()%>"/><br/>
-                <br/>
-                <label>Birthplace: </label>
-                <input type="text" size=30 name="email" value="<%=user.getCountry().getName()%>"/><br/>
-                <br/>
-                <label>Nationality: </label>
-                <input type="text" size=30 name="birthday" value="<%=user.getCountry().getNationality()%>"/><br/>
-                <br/>
+                <div class="form_group">
+                    <label>Name: </label>
+                    <input type="text" class="form-control" name="name" value="<%=user.getName()%>"/>
+                </div>
+                <div class="form_group">
+                    <label>Surname: </label>
+                    <input type="text" class="form-control" name="surname" value="<%=user.getSurname()%>"/>
+                </div>
+                <div class="form_group">
+                    <label>Address: </label>
+                    <input type="text" class="form-control" name="address" value="<%=user.getAddress()%>"/>
+                </div>
+                <div>
+                    <label>Phone: </label>
+                    <input type="text" class="form-control" name="phone" value="<%=user.getPhone()%>"/>
+                </div>
+                <div>
+                    <label>Email: </label>
+                    <input type="text" class="form-control" name="email" value="<%=user.getEmail()%>"/>
+                </div>
+                <div>
+                    <label>Profile Description: </label>
+                    <input type="text" class="form-control" name="profile" value="<%=user.getProfileDescription()%>"/>
+                </div>
+                <div>
+                    <label>Birthday: </label>
+                    <input type="text" class="form-control" name="birthday" value="<%=user.getBirthday()%>"/>
+                </div>
+                <div>
+                    <label>Birthplace: </label>
+                    <input type="text" class="form-control" name="email" value="<%=user.getCountry().getName()%>"/>
+                </div>
+                <div>
+                    <label>Nationality: </label>
+                    <input type="text" class="form-control" name="birthday" value="<%=user.getCountry().getNationality()%>"  style="margin-bottom: 10px"/>
+                </div>
                 <input type="submit" name="save" value="Save"/>
             </form>
         </div>

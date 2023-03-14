@@ -1,5 +1,6 @@
 package com.erturk.resumeapp.controller;
 
+import com.erturk.resumeapp.util.ControllerUtil;
 import dao.inter.UserDaoInter;
 import entitiy.User;
 import main.Context;
@@ -11,10 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "UserDetailController", value = "/userdetail")
+@WebServlet(name = "UserDetailController", value = "/userdetails")
 public class UserDetailController extends HttpServlet {
     private UserDaoInter userDao = Context.instanceUserDao();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -28,6 +28,7 @@ public class UserDetailController extends HttpServlet {
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
+            String profileDescription = request.getParameter("profile");
 
             User user = userDao.getById(id);
             user.setName(name);
@@ -35,15 +36,15 @@ public class UserDetailController extends HttpServlet {
             user.setAddress(address);
             user.setPhone(phone);
             user.setEmail(email);
+            user.setProfileDescription(profileDescription);
 
             userDao.updateUser(user);
         } else if (action.equals("delete")) {
             userDao.removeUser(id);
         }
 
-        response.sendRedirect("user");
+        response.sendRedirect("users");
     }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -65,8 +66,7 @@ public class UserDetailController extends HttpServlet {
             request.setAttribute("user", user);
             request.getRequestDispatcher("userdetails.jsp").forward(request, response);
         } catch (IllegalArgumentException ex) {
-            ex.printStackTrace();
-            response.sendRedirect("error?message=" + ex.getMessage());
+            ControllerUtil.errorPage(response, ex);
         }
     }
 }
