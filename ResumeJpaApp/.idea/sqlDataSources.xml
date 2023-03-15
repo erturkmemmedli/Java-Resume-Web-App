@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="05e9399c-5537-41ec-9414-21c2ab177537" name="resume@localhost Mapping">
+      <data-sources db="4e6627c1-2a18-468c-931d-852e5845361a" />
+      <scope>
+        <node kind="schema" qname="resume" />
+      </scope>
+    </mapping>
+  </component>
+</project>
