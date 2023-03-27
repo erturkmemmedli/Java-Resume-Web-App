@@ -15,6 +15,8 @@
               integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
+
         <%
             User user = (User) request.getAttribute("user");
         %>
@@ -56,7 +58,7 @@
                 </div>
                 <div>
                     <label>Nationality: </label>
-                    <input type="text" class="form-control" name="birthday" value="<%=user.getCountry().getNationality()%>"  style="margin-bottom: 10px"/>
+                    <input type="text" class="form-control" name="birthday" value="<%=user.getCountry().getNationality()%>" style="margin-bottom: 10px"/>
                 </div>
                 <input type="submit" name="save" value="Save"/>
             </form>

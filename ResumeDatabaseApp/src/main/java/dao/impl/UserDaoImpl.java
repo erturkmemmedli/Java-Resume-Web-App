@@ -130,19 +130,17 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
             PreparedStatement setForeignKeyChecks = connection.prepareStatement("set foreign_key_checks = 0");
             setForeignKeyChecks.execute();
             PreparedStatement statement = connection.prepareStatement("update user " +
-                    "set name = ?, surname = ?, email = ?, phone = ?, password = ?, " +
-                    "profile_description = ?, birthday = ?, address = ?, country_id = ? " +
-                    "where id = ?");
+                    "set name = ?, surname = ?, email = ?, phone = ?, profile_description = ?," +
+                    "birthday = ?, address = ?, country_id = ? where id = ?");
             statement.setString(1, u.getName());
             statement.setString(2, u.getSurname());
             statement.setString(3, u.getEmail());
             statement.setString(4, u.getPhone());
-            statement.setString(5, crypt.hashToString(4, u.getPassword().toCharArray()));
-            statement.setString(6, u.getProfileDescription());
-            statement.setDate(7, u.getBirthday());
-            statement.setString(8, u.getAddress());
-            statement.setInt(9, u.getCountry().getId());
-            statement.setInt(10, u.getId());
+            statement.setString(5, u.getProfileDescription());
+            statement.setDate(6, u.getBirthday());
+            statement.setString(7, u.getAddress());
+            statement.setInt(8, u.getCountry().getId());
+            statement.setInt(9, u.getId());
             return statement.execute();
         } catch (Exception ex) {
             ex.printStackTrace();

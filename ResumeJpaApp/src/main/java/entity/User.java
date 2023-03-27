@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name = "User.findByEmail", query = "select u from User u where u.email =: email")
 public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

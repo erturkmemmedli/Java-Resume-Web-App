@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="ResumeDatabaseApp" />
+        <module name="ResumeJpaApp" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ResumeDatabaseApp" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -32,6 +32,8 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <jsp:include page="header.jsp"/>
+
     <%
         List<User> users = (List<User>) request.getAttribute("users");
     %>
@@ -76,7 +78,7 @@
                     <tr>
                         <td><%=u.getName()%></td>
                         <td><%=u.getSurname()%></td>
-                        <td><%=u.getCountry().getNationality()==null ? "N/A" : u.getCountry().getNationality()%></td>
+                        <td><%=u.getCountry().getNationality()%></td>
                         <td style="width: 5px">
                             <input type="hidden" name="id" value="<%=u.getId()%>"/>
                             <input type="hidden" name="action" value="delete"/>
@@ -96,7 +98,7 @@
                             </form>
                         </td>
                         <td style="width: 5px">
-                            <form action="userdetails" method="get">
+                            <form action="userdetailsinfo" method="get">
                                 <input type="hidden" name="id" value="<%=u.getId()%>"/>
                                 <input type="hidden" name="action" value="info"/>
                                 <button class="btn btn-info" type="submit" value="Info">

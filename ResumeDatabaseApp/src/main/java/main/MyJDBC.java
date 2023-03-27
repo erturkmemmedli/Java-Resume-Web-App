@@ -4,6 +4,6 @@ import dao.inter.UserDaoInter;
 
 public class MyJDBC {
     public static void main(String[] args) {
-        UserDaoInter u = Context.instanceUserDao();
+        UserDaoInter userDao = Context.instanceUserDao();
     }
 }
