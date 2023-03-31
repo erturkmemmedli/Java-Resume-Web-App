@@ -16,7 +16,17 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
     private BCrypt.Hasher crypt = BCrypt.withDefaults();
 
     @Override
-    public List<User> getAll(String name, String surname, Integer countryId) {
+    public List<User> getAll() {
+        EntityManager entityManager = entityManager();
+
+        String jpql = "select u from User u";
+        Query query = entityManager.createQuery(jpql, User.class);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<User> getAllByFilter(String name, String surname, Integer countryId) {
         EntityManager entityManager = entityManager();
 
         String jpql = "select u from User u where 1=1";
@@ -47,10 +57,10 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
     }
 
     @Override
-    public User getById(int userId) {
+    public User getById(int id) {
         EntityManager entityManager = entityManager();
 
-        User user = entityManager.find(User.class, userId);
+        User user = entityManager.find(User.class, id);
 
         entityManager.close();
         return user;

@@ -5,9 +5,10 @@ import entity.EmploymentHistory;
 import java.util.List;
 
 public interface EmploymentHistoryDaoInter {
-    public List<EmploymentHistory> getAllEmploymentHistoryByUserId(int userId);
-    public EmploymentHistory getEmploymentHistoryId(int id);
-    public void updateEmploymentHistory(EmploymentHistory e);
-    public void insertEmploymentHistory(EmploymentHistory e);
-    public void deleteEmploymentHistory(int id);
+    List<EmploymentHistory> getAll();
+    EmploymentHistory getById(int id);
+    List<EmploymentHistory> getAllByUserId(int id);
+    boolean updateEmploymentHistory(EmploymentHistory employmentHistory);
+    boolean addEmploymentHistory(EmploymentHistory employmentHistory);
+    boolean removeEmploymentHistory(int id);
 }

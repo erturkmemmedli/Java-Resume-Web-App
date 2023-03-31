@@ -4,63 +4,66 @@ import dao.inter.AbstractDao;
 import dao.inter.SkillDaoInter;
 import entity.Skill;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 public class SkillDaoImpl extends AbstractDao implements SkillDaoInter {
     @Override
     public List<Skill> getAll() {
-        List<Skill> list = new ArrayList<>();
-        try(Connection connection = connect()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from skill");
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String skill = resultSet.getString("name");
-                //list.add(new Skill(id, skill));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return list;
+        EntityManager entityManager = entityManager();
+
+        String jpql = "select s from Skill s";
+        Query query = entityManager.createQuery(jpql, Skill.class);
+
+        return query.getResultList();
     }
 
     @Override
-    public int insertSkill(Skill skill) {
-        try(Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("insert " +
-                    "into skill (name) " +
-                    "select ? from dual " +
-                    "where not exists " +
-                    "(select * from skill " +
-                    "where name = ? " +
-                    "limit 1)",
-                    Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, skill.getName());
-            statement.setString(2, skill.getName());
-            statement.execute();
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                skill.setId(generatedKeys.getInt(1));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return skill.getId();
+    public Skill getById(int id) {
+        EntityManager entityManager = entityManager();
+
+        Skill skill = entityManager.find(Skill.class, id);
+
+        entityManager.close();
+        return skill;
     }
 
-    public void deleteSkill(int id) {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("delete " +
-                    "from skill where id = ?");
-            statement.setInt(1, id);
-            statement.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    @Override
+    public boolean addSkill(Skill skill) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(skill);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
+    }
+
+    @Override
+    public boolean removeSkill(int id) {
+        EntityManager entityManager = entityManager();
+
+        Skill skill = entityManager.find(Skill.class, id);
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(skill);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
+    }
+
+    @Override
+    public boolean updateSkill(Skill skill) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(skill);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
     }
 }

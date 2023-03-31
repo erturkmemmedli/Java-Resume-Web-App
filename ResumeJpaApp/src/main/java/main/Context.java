@@ -15,10 +15,6 @@ public class Context {
     public static EmploymentHistoryDaoInter instanceEmploymentHistoryDao() {
         return new EmploymentHistoryDaoImpl();
     }
-    
-    public static UserEmploymentHistoryDaoInter instanceUserEmploymentHistoryDao() {
-        return new UserEmploymentHistoryDaoImpl();
-    }
 
     public static CountryDaoInter instanceCountryDao() {
         return new CountryDaoImpl();

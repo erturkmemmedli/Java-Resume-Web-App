@@ -4,28 +4,67 @@ import dao.inter.AbstractDao;
 import dao.inter.CountryDaoInter;
 import entity.Country;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
+
     @Override
-    public List<Country> getCountryAndNationality() {
-        List<Country> list = new ArrayList<>();
-        try(Connection connection = connect()) {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from country");
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String birthplace = resultSet.getString("name");
-                String nationality =  resultSet.getString("nationality");
-                //list.add(new Country(id, birthplace, nationality));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return list;
+    public List<Country> getAll() {
+        EntityManager entityManager = entityManager();
+
+        String jpql = "select c from Country c";
+        Query query = entityManager.createQuery(jpql, Country.class);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public Country getById(int id) {
+        EntityManager entityManager = entityManager();
+
+        Country country = entityManager.find(Country.class, id);
+
+        entityManager.close();
+        return country;
+    }
+
+    @Override
+    public boolean addCountry(Country country) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(country);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
+    }
+
+    @Override
+    public boolean removeCountry(int id) {
+        EntityManager entityManager = entityManager();
+
+        Country country = entityManager.find(Country.class, id);
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(country);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
+    }
+
+    @Override
+    public boolean updateCountry(Country country) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(country);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
     }
 }

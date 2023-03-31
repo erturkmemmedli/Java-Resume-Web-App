@@ -4,112 +4,77 @@ import dao.inter.AbstractDao;
 import dao.inter.EmploymentHistoryDaoInter;
 import entity.EmploymentHistory;
 
-import java.sql.*;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentHistoryDaoInter {
     @Override
-    public List<EmploymentHistory> getAllEmploymentHistoryByUserId(int userId) {
-        List<EmploymentHistory> result = new ArrayList<>();
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("select " +
-                    "* from employment_history " +
-                    "where user_id = ?");
-            statement.setInt(1, userId);
-            statement.execute();
-            ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()) {
-                EmploymentHistory employmentHistory = getEmploymentHistory(resultSet);
-                result.add(employmentHistory);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
-    }
+    public List<EmploymentHistory> getAll() {
+        EntityManager entityManager = entityManager();
 
-    private EmploymentHistory getEmploymentHistory(ResultSet resultSet) throws Exception {
-        int id = resultSet.getInt("id");
-        String header = resultSet.getString("header");
-        String jobDescription = resultSet.getString("job_description");
-        Date beginDate = resultSet.getDate("begin_date");
-        Date endDate = resultSet.getDate("end_date");
-        int userId = resultSet.getInt("user_id");
-        return null;//new EmploymentHistory(id, header, beginDate, endDate,jobDescription, new User(userId));
+        String jpql = "select e from EmploymentHistory e";
+        Query query = entityManager.createQuery(jpql, EmploymentHistory.class);
+
+        return query.getResultList();
     }
 
     @Override
-    public EmploymentHistory getEmploymentHistoryId(int id) {
-        EmploymentHistory employmentHistory = null;
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("select " +
-                    "* from employment_history " +
-                    "where id = ?");
-            statement.setInt(1, id);
-            statement.execute();
-            ResultSet resultSet = statement.getResultSet();
-            while (resultSet.next()) {
-                employmentHistory = getEmploymentHistory(resultSet);
-                return employmentHistory;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public EmploymentHistory getById(int id) {
+        EntityManager entityManager = entityManager();
+
+        EmploymentHistory employmentHistory = entityManager.find(EmploymentHistory.class, id);
+
+        entityManager.close();
         return employmentHistory;
     }
 
     @Override
-    public void updateEmploymentHistory(EmploymentHistory e) {
-        try (Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("update " +
-                    "employment_history " +
-                    "set header=?, job_description=?, begin_date = ?, end_date = ? " +
-                    "where id = ?");
-            statement.setString(1, e.getHeader());
-            statement.setString(2, e.getJobDescription());
-            statement.setDate(3, e.getBeginDate());
-            statement.setDate(4, e.getEndDate());
-            statement.setInt(5, e.getId());
-            statement.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public List<EmploymentHistory> getAllByUserId(int id) {
+        EntityManager entityManager = entityManager();
+
+        String jpql = "select e from EmploymentHistory e where userId =: id";
+        Query query = entityManager.createQuery(jpql, EmploymentHistory.class);
+        query.setParameter("id", id);
+
+        return query.getResultList();
     }
 
     @Override
-    public void insertEmploymentHistory(EmploymentHistory e) {
-//        try (Connection connection = connect()) {
-//            PreparedStatement statement = connection.prepareStatement("insert " +
-//                    "employment_history (id, header, job_description, begin_date , end_date, user_id) " +
-//                    "values (? , ? , ? , ? , ?, ?) ",
-//                    Statement.RETURN_GENERATED_KEYS);
-//            statement.setInt(1, e.getId());
-//            statement.setString(2, e.getHeader());
-//            statement.setString(3, e.getJobDescription());
-//            statement.setDate(4, e.getBeginDate());
-//            statement.setDate(5, e.getEndDate());
-//            statement.setInt(6, e.getUser().getId());
-//            statement.execute();
-//            ResultSet genKeys = statement.getGeneratedKeys();
-//            if(genKeys.next()){
-//                e.setId(genKeys.getInt(1));
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+    public boolean updateEmploymentHistory(EmploymentHistory employmentHistory) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.merge(employmentHistory);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
     }
 
     @Override
-    public void deleteEmploymentHistory(int id) {
-        try(Connection connection = connect()) {
-            PreparedStatement statement = connection.prepareStatement("delete " +
-                    "from employment_history " +
-                    "where id = ?");
-            statement.setInt(1, id);
-            statement.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public boolean addEmploymentHistory(EmploymentHistory employmentHistory) {
+        EntityManager entityManager = entityManager();
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(employmentHistory);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
+    }
+
+    @Override
+    public boolean removeEmploymentHistory(int id) {
+        EntityManager entityManager = entityManager();
+
+        EmploymentHistory employmentHistory = entityManager.find(EmploymentHistory.class, id);
+
+        entityManager.getTransaction().begin();
+        entityManager.remove(employmentHistory);
+        entityManager.getTransaction().commit();
+
+        entityManager.close();
+        return true;
     }
 }

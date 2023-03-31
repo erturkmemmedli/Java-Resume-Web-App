@@ -5,8 +5,10 @@ import entity.UserSkill;
 import java.util.List;
 
 public interface UserSkillDaoInter {
-    public List<UserSkill> getAllSkillByUserId(int userId);
-    public void deleteSkillById(int id);
-    public void insertSkillByUser(UserSkill u);
-    public void updateUserSkill(UserSkill u);
+    List<UserSkill> getAll();
+    UserSkill getById(int id);
+    List<UserSkill> getAllByUserId(int id);
+    boolean removeUserSkill(int id);
+    boolean addUserSkill(UserSkill userSkill);
+    boolean updateUserSkill(UserSkill userSkill);
 }

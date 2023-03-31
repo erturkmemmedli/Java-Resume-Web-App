@@ -5,7 +5,9 @@ import entity.Skill;
 import java.util.List;
 
 public interface SkillDaoInter {
-    public List<Skill> getAll();
-    public int insertSkill(Skill skill);
-    public void deleteSkill(int id);
+    List<Skill> getAll();
+    Skill getById(int id);
+    boolean addSkill(Skill skill);
+    boolean removeSkill(int id);
+    boolean updateSkill(Skill skill);
 }
