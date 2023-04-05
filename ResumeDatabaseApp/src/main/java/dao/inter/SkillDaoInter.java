@@ -1,6 +1,6 @@
 package dao.inter;
 
-import entitiy.Skill;
+import entity.Skill;
 
 import java.util.List;
 

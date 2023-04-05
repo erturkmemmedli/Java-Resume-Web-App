@@ -2,7 +2,7 @@ package dao.impl;
 
 import dao.inter.AbstractDao;
 import dao.inter.CountryDaoInter;
-import entitiy.Country;
+import entity.Country;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,5 +27,21 @@ public class CountryDaoImpl extends AbstractDao implements CountryDaoInter {
             ex.printStackTrace();
         }
         return list;
+    }
+
+    public Country getById(int id) {
+        Country result = null;
+        try (Connection connection = connect()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from country where id = " + id);
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String nationality = resultSet.getString("nationality");
+                result = new Country(id, name, nationality);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
     }
 }

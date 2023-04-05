@@ -3,8 +3,8 @@ package dao.impl;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import dao.inter.AbstractDao;
 import dao.inter.UserDaoInter;
-import entitiy.Country;
-import entitiy.User;
+import entity.Country;
+import entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;

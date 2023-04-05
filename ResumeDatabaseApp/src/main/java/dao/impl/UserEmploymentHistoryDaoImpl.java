@@ -2,8 +2,8 @@ package dao.impl;
 
 import dao.inter.AbstractDao;
 import dao.inter.UserEmploymentHistoryDaoInter;
-import entitiy.EmploymentHistory;
-import entitiy.User;
+import entity.EmploymentHistory;
+import entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;

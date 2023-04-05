@@ -2,9 +2,9 @@ package dao.impl;
 
 import dao.inter.AbstractDao;
 import dao.inter.UserSkillDaoInter;
-import entitiy.Skill;
-import entitiy.User;
-import entitiy.UserSkill;
+import entity.Skill;
+import entity.User;
+import entity.UserSkill;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
