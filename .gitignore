@@ -1,2 +1,4 @@
- /MySQLConnectionWithJDBC/target 
- /ResumeWebApp/target
+/ResumeDatabaseApp/target 
+/ResumeWebAppUsingJDBC/target
+/ResumeJpaApp/target
+/ResumeWebAppUsingJPA
