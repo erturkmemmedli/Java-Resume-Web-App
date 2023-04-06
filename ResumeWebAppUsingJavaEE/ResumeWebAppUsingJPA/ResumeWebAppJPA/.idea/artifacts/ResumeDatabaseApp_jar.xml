@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ResumeDatabaseApp:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ResumeDatabaseApp_jar</output-path>
+    <root id="archive" name="ResumeDatabaseApp.jar">
+      <element id="module-output" name="ResumeDatabaseApp" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../ResumeDatabaseApp/lib/mysql-connector-j-8.0.32.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

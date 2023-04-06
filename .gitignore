@@ -1,4 +1,4 @@
-/ResumeDatabaseApp/target 
-/ResumeWebAppUsingJDBC/target
-/ResumeJpaApp/target
-/ResumeWebAppUsingJPA/target
+/ResumeWebAppUsingJavaEE/ResumeWebAppUsingJDBC/ResumeDatabaseApp/target 
+/ResumeWebAppUsingJavaEE/ResumeWebAppUsingJDBC/ResumeWebAppJDBC/target
+/ResumeWebAppUsingJavaEE/ResumeWebAppUsingJPA/ResumeDatabaseApp/target
+/ResumeWebAppUsingJavaEE/ResumeWebAppUsingJPA/ResumeWebAppJPA/target
