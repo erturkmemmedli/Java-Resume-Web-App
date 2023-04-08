@@ -3,6 +3,8 @@ package com.erturk.dao.impl;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.erturk.dao.inter.UserDaoInter;
 import com.erturk.entity.User;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,7 +15,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-
 @Repository("userDao")
 public class UserDaoImpl implements UserDaoInter {
     @PersistenceContext
@@ -22,6 +23,7 @@ public class UserDaoImpl implements UserDaoInter {
     private BCrypt.Hasher crypt = BCrypt.withDefaults();
 
     @Override
+    @Cacheable(value = "users")
     public List<User> getAll() {
         String jpql = "select u from User u";
         Query query = entityManager.createQuery(jpql, User.class);
@@ -29,6 +31,7 @@ public class UserDaoImpl implements UserDaoInter {
     }
 
     @Override
+    @Cacheable(value = "usersFiltered")
     public List<User> getAllByFilter(String name, String surname, Integer countryId) {
         String jpql = "select u from User u where 1=1";
         if (name != null && !name.trim().isEmpty()) {

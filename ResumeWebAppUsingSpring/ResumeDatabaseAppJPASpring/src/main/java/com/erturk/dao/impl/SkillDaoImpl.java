@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Repository
+@Repository("skillDao")
 public class SkillDaoImpl implements SkillDaoInter {
     @PersistenceContext
     EntityManager entityManager;

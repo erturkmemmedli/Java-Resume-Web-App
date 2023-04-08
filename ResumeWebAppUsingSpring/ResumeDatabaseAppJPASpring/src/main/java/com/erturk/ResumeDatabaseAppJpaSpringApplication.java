@@ -1,34 +1,41 @@
 package com.erturk;
 
-import com.erturk.dao.impl.UserDaoImpl;
-import com.erturk.dao.inter.UserDaoInter;
+import com.erturk.dao.inter.UserRepository;
 import com.erturk.entity.User;
+import com.erturk.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
 @SpringBootApplication
+@EnableCaching
 public class ResumeDatabaseAppJpaSpringApplication {
-    @Autowired
-    @Qualifier("userDao")
-    private UserDaoInter userDao;
-
     public static void main(String[] args) {
         SpringApplication.run(ResumeDatabaseAppJpaSpringApplication.class, args);
     }
+    // DI - Dependency Injection
+    // IoC - Inversion of Control
+
+    @Autowired
+    @Qualifier("userService")
+    private UserServiceInter userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Bean
     public CommandLineRunner run() {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                List<User> list = userDao.getAll();
-                System.out.println(list);
+                List<User> list = userRepository.findBySurname("Məmmədli");
+                for (User u: list) System.out.println(u.getName());
             }
         };
         return clr;

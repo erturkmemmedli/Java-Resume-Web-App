@@ -9,9 +9,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Repository
+@Repository("countryDao")
 public class CountryDaoImpl implements CountryDaoInter {
-
     @PersistenceContext
     EntityManager entityManager;
 

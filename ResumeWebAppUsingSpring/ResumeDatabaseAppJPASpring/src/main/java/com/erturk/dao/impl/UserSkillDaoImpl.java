@@ -9,8 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-
-@Repository
+@Repository("userSkillDao")
 public class UserSkillDaoImpl implements UserSkillDaoInter {
     @PersistenceContext
     EntityManager entityManager;

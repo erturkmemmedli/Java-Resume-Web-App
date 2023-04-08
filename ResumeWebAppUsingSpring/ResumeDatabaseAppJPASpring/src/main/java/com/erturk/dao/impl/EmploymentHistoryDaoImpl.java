@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Repository
+@Repository("employmentHistoryDao")
 public class EmploymentHistoryDaoImpl implements EmploymentHistoryDaoInter {
     @PersistenceContext
     EntityManager entityManager;
