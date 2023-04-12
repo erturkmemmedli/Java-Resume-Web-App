@@ -28,7 +28,6 @@ public class ResumeDatabaseAppJpaSpringApplication {
 
     @Autowired
     private UserRepository userRepository;
-
     @Bean
     public CommandLineRunner run() {
         CommandLineRunner clr = new CommandLineRunner() {
