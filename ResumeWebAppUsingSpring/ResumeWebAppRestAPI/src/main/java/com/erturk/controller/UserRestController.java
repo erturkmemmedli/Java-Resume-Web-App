@@ -6,6 +6,7 @@ import com.erturk.entity.User;
 import com.erturk.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,11 +49,13 @@ public class UserRestController {
         return ResponseEntity.ok(ResponseDTO.of(new UserDTO(user), "Successfully deleted!"));
     }
 
-    @PostMapping("/users/{id}")
+    @PostMapping("/users")
     public ResponseEntity<ResponseDTO> addUser(@RequestBody UserDTO userDto) {
         User user = new User();
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
         user.setPassword(userDto.getPassword());
 
         userService.addUser(user);
@@ -61,6 +64,8 @@ public class UserRestController {
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());
         userDTO.setSurname(user.getSurname());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPhone(user.getPhone());
 
         return ResponseEntity.ok(ResponseDTO.of(userDTO, "Successfully added!"));
     }

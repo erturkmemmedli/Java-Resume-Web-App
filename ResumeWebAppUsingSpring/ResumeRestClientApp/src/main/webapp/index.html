@@ -1,22 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rest Client</title>
 
     <script>
-        function printUsers(arr){
+        function printUsers(arr) {
             const container = document.getElementById("container");
             container.innerHTML = '';
 
             for (let i = 0; arr.length; i++) {
                 const obj = arr[i];
                 const deleteBtn = '<button onclick = "deleteUser(' + obj.id + ')">DELETE</button>';
-                const str = obj.id + " " + obj.name + " " + obj.surname + deleteBtn + "<br/>";
+                const str = obj.id + " " + obj.name + " " + obj.surname + " " + deleteBtn + "<br/>";
                 container.innerHTML += str;
             }
         }
 
-        function deleteUser(id){
+        function deleteUser(id) {
             const xHttp = new XMLHttpRequest();
 
             xHttp.onreadystatechange = function() {
@@ -25,7 +26,7 @@
                 }
             };
 
-            xHttp.open("DELETE", "http://localhost:8085/resumerest/users/" + id, true);
+            xHttp.open("DELETE", "http://localhost:8080/resume/users/" + id, true);
             xHttp.send();
         }
 
@@ -40,7 +41,7 @@
                 }
             };
 
-            xHttp.open("GET", "http://localhost:8085/resumerest/users", true);
+            xHttp.open("GET", "http://localhost:8080/resume/users", true);
             xHttp.send();
         }
 
@@ -55,10 +56,12 @@
 
             const name = document.getElementById("name").value;
             const surname = document.getElementById("surname").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
             const password = document.getElementById("password").value;
-            const user = {name: name, surname: surname, password: password};
+            const user = {name: name, surname: surname, password: password, email: email, phone: phone};
 
-            xHttp.open("POST", "http://localhost:8085/resumerest/users", true);
+            xHttp.open("POST", "http://localhost:8080/resume/users", true);
             xHttp.setRequestHeader("Content-Type", "application/json");
             xHttp.send(JSON.stringify(user));
         }
@@ -66,13 +69,14 @@
 
 </head>
 <body onload = "getUsers()">
-    <div>
-<%--        <button onclick="deleteUser(32)" value="DELETE"/>--%>
-        <input type = "text" id = "name"/>
-        <input type = "text" id = "surname"/>
-        <input type = "password" id = "password"/>
-        <button onclick = "addUser()">ADD</button>
-    </div>
-    <div id = "container"></div>
+<div>
+    <input type = "text" id = "name" placeholder="Name"/><br>
+    <input type = "text" id = "surname" placeholder="Surname"/><br>
+    <input type = "text" id = "email" placeholder="Email"/><br>
+    <input type = "text" id = "phone" placeholder="Phone"/><br>
+    <input type = "password" id = "password" placeholder="Password"/><br>
+    <button onclick = "addUser()">ADD</button>
+</div>
+<div id = "container"></div>
 </body>
 </html>
