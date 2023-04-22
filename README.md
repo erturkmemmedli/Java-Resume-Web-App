@@ -10,11 +10,11 @@ Key words for this project:
 - Frontend Design -> JSP, HTML5, CSS3, JavaScript, Bootstrap, jQuery, JSTL
 - Object Relational Mapping (ORM) -> JPA, Hibernate
 - Overall Model-View-Control (MVC) -> MySQL-JSP-Servlet
-- Improvement for Backend -> Spring Boot, Spring Data, Spring MVC, Spring Security
+- Improvement for Backend -> Spring Boot, Spring Data, Spring MVC, Spring Security, RESTful API
 
-Note: This app is the primitive version of my project "HR Job Application Management System for Internal and External Applications" in SOCAR,
+Note: This app is the primitive version of my project "HR Job Application Management System for Internal and External Job Applications" in SOCAR,
 and just shows general image and nature of the project due to the confidentiality. By implementing this project as a hobby project, 
-the aim is showing some of my capabilities as a Backend Engineer.
+the aim is to show some of my Software Engineering skills.
 
 Info: This app was designed to create a database, consisting of resumes of users, and provide web interface for them. 
 Furthermore, new resumes can be added to the database, existing resumes can be updated and deleted. 
