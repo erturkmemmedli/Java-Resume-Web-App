@@ -10,7 +10,7 @@ Key words for this project:
 - Frontend Design -> JSP, HTML5, CSS3, JavaScript, Bootstrap, jQuery, JSTL
 - Object Relational Mapping (ORM) -> JPA, Hibernate
 - Overall Model-View-Control (MVC) -> MySQL-JSP-Servlet
-- Improvement for Backend -> Spring Boot, Spring Data, Spring MVC, Spring Security, RESTful API, JWT
+- Improvement for Backend -> Spring Boot, Spring Data, Spring MVC, Spring AOP, Spring Security, RESTful API, JWT
 
 Note: This app is the primitive version of my project "HR Job Application Management System for Internal and External Job Applications" in SOCAR,
 and just shows general image and nature of the project due to the confidentiality. By implementing this project as a hobby project, 
