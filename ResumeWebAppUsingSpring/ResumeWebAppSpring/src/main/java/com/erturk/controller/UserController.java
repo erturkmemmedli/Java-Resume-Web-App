@@ -99,7 +99,7 @@ public class UserController {
     DummyService dummyService;
 
     @RequestMapping(method = {RequestMethod.GET}, value="/foo")
-    public String foo(){
+    public String foo() {
         System.out.println("foo in Controller");
         dummyService.foo();
         return "users";

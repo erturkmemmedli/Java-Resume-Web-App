@@ -33,8 +33,11 @@ public class ResumeDatabaseAppJpaSpringApplication {
         CommandLineRunner clr = new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                List<User> list = userRepository.findBySurname("Məmmədli");
-                for (User u: list) System.out.println(u.getName());
+                System.out.println("JPA app started!");
+//                List<User> list = userRepository.findBySurname("Məmmədli");
+//                for (User u: list) System.out.println(u.getName());
+//                List<User> users = userService.getAll();
+//                for(User u: users) {u.setPassword("12345"); userService.updateUser(u);}
             }
         };
         return clr;

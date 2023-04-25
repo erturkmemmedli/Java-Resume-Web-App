@@ -4,8 +4,8 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.erturk.dao.inter.UserDaoInter;
 import com.erturk.entity.User;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -19,7 +19,8 @@ public class UserDaoImpl implements UserDaoInter {
     @PersistenceContext
     EntityManager entityManager;
 
-    private BCrypt.Hasher crypt = BCrypt.withDefaults();
+    //private BCrypt.Hasher crypt = BCrypt.withDefaults();
+    private BCryptPasswordEncoder crypt = new BCryptPasswordEncoder();
 
     @Override
     //@Cacheable(value = "users")
@@ -63,7 +64,8 @@ public class UserDaoImpl implements UserDaoInter {
 
     @Override
     public boolean updateUser(User user) {
-        user.setPassword(crypt.hashToString(4, user.getPassword().toCharArray()));
+        //user.setPassword(crypt.hashToString(4, user.getPassword().toCharArray()));
+        user.setPassword(crypt.encode(user.getPassword()));
         entityManager.merge(user);
         return true;
     }
@@ -77,11 +79,11 @@ public class UserDaoImpl implements UserDaoInter {
 
     @Override
     public boolean addUser(User user) {
-        user.setPassword(crypt.hashToString(4, user.getPassword().toCharArray()));
+        //user.setPassword(crypt.hashToString(4, user.getPassword().toCharArray()));
+        user.setPassword(crypt.encode(user.getPassword()));
         entityManager.persist(user);
         return true;
     }
-
     @Override
     public User findByEmailAndPassword(String email, String password) {
         Query query = entityManager.createQuery("select u from User u where u.email=:e and u.password=:p", User.class);

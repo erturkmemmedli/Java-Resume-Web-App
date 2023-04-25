@@ -31,7 +31,7 @@ public class UserDetailController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/userdelete")
-    public ModelAndView postDelete(@ModelAttribute("user") UserForm uf){
+    public ModelAndView postDelete(@ModelAttribute("user") UserForm uf) {
         userService.removeUser(uf.getId());
 
         List<User> users = userService.getAll();
@@ -41,7 +41,7 @@ public class UserDetailController {
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/userupdate")
-    public ModelAndView postUpdate(@ModelAttribute("user") UserForm uf){
+    public ModelAndView postUpdate(@ModelAttribute("user") UserForm uf) {
         User user = userService.getById(uf.getId());
 
         user.setName(uf.getName());

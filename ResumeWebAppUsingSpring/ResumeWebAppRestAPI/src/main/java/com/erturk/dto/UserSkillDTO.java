@@ -3,25 +3,31 @@ package com.erturk.dto;
 import com.erturk.entity.UserSkill;
 
 public class UserSkillDTO {
-    private Integer id;
+    private Integer userId;
     private Integer power;
     private SkillDTO skill;
 
     public UserSkillDTO() {
     }
 
+    public UserSkillDTO(Integer userId, Integer power, SkillDTO skill) {
+        this.userId = userId;
+        this.power = power;
+        this.skill = skill;
+    }
+
     public UserSkillDTO(UserSkill userSkill) {
-        this.id = userSkill.getId();
+        this.userId = userSkill.getUserId();
         this.power = userSkill.getPower();
         this.skill = new SkillDTO(userSkill.getSkillBySkillId());
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public Integer getPower() {

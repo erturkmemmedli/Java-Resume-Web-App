@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DummyService {
-    @PreAuthorize("hasRole('ADMIN')")//ROLE_USER, ROLE_ADMIN
+    @PreAuthorize("hasRole('ADMIN')") //ROLE_USER, ROLE_ADMIN
     public void foo(){
         System.out.println("foo method");
     }
